@@ -1,8 +1,8 @@
-// xwblog（基于博客号 BlogHao 二次开发）—— Cloudflare Workers 配置
-// 本地 D1/R2 资源已创建：xwblog-db / xwblog-images，database_id 见下方
+// bloghao-btc（比特囤币博客，基于博客号 BlogHao）—— Cloudflare Workers 配置
+// 生产 D1/R2 资源：bloghao-btc-db / bloghao-btc-images，database_id 见下方
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "xwblog",
+  "name": "bloghao-btc",
   "main": "src/index.ts",
   "compatibility_date": "2025-09-01",
 
@@ -16,17 +16,17 @@
   // schema.sql 同为文本（仅演示站 chunk 引用，冷启动建表见 src/demo.ts）——同类型规则必须合并一条
   "rules": [{ "type": "Text", "globs": ["**/*.css", "**/*.sql"] }],
 
-  // D1 数据库：xwblog-db（与原 bloghao-db 完全隔离）
+  // D1 数据库：bloghao-btc-db
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "xwblog-db",
-      "database_id": "0e71821c-7eac-4713-8ba3-21af7cca0631"
+      "database_name": "bloghao-btc-db",
+      "database_id": "8ec5f3e4-b96f-43eb-82c3-76911137a6ed"
     }
   ],
 
-  // R2 存储桶（图床）：xwblog-images
-  "r2_buckets": [{ "binding": "IMAGES", "bucket_name": "xwblog-images" }],
+  // R2 存储桶（图床）：bloghao-btc-images
+  "r2_buckets": [{ "binding": "IMAGES", "bucket_name": "bloghao-btc-images" }],
 
   // 定时任务：每分钟扫描定时发布（scheduler.ts）；
   // "30 16 * * *" = 北京时间 00:30 自动备份 D1 → R2 backups/（30 份滚动）
